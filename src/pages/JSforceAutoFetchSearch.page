@@ -1,0 +1,48 @@
+<apex:page docType="HTML-5.0" showHeader="true" sidebar="false" id="page">
+    <apex:includeScript value="{!URLFOR($Resource.jQuery, 'dist/jquery.min.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.JSforce, 'dist/jsforce.min.js')}" />
+    <apex:include pageName="JSforceAutoFetchSearchCss" />
+
+    <body id="vf-body">
+        <div id="vf-page">
+            <apex:form id="form">
+                <article class="title">
+                    <h1 >
+                        <apex:outputText value="JSforce AutoFetch Seach" />
+                    </h1>
+                </article>
+                <article class="search">
+                    <div class="inputGroup">
+                        <apex:input type="text" html-placeholder="Please Account Name" html-maxlength="80" styleClass="searchText" id="searchText" />
+                        <apex:commandLink value=" Search " title="Search" onclick="return doAccountSearch();" styleClass="linkBtn" id="searchBtn" />
+                    </div>
+                </article>
+                <article class="result">
+                    <table cellpadding="0" cellspacing="0" id="accountTable">
+                        <colgroup>
+                            <col width="80" />
+                            <col width="600" />
+                            <col />
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th >
+                                    <apex:outputText value="No" />
+                                </th>
+                                <th>
+                                    <apex:outputText value="{!$ObjectType.Account.Fields.Name.Label}" />
+                                </th>
+                                <th>
+                                    <apex:outputText value="Owner" />
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="accountTableBody"></tbody>
+                    </table>
+                </article>
+            </apex:form>
+        </div>
+
+        <apex:include pageName="JSforceAutoFetchSearchScript" />
+    </body>
+</apex:page>

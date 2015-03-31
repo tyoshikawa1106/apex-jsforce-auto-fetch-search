@@ -1,0 +1,78 @@
+<apex:page >
+    <script type="text/javascript">
+        beenFocused = true;
+
+        var $j = jQuery.noConflict();
+        // Account Table
+        var $accountTableBody = $j('#accountTableBody');
+        
+        // Account Search
+        function doAccountSearch(){
+            
+            var conn = new jsforce.Connection({ accessToken: '{!$Api.Session_Id}' });
+            // Account Table Clear
+            $accountTableBody.children().remove();
+            // Get Search Key
+            var searchKey = $j('[id$=searchText]').val();
+            
+            // Get Query
+            var soql = getAccountSearchQuery(searchKey);
+
+            // Connection Query
+            var records = [];
+            var recordNo = 1;
+            conn.query(soql)
+                .on("record", function(record) {
+                    // Add Account
+                    addAccount(recordNo, record);
+                    // CountUp
+                    recordNo++;
+                })
+                .on("end", function(query) {
+                    console.log("total in database : " + query.totalSize);
+                    console.log("total fetched : " + query.totalFetched);
+                })
+                .on("error", function(err) {
+                    console.error(err);
+                })
+                .run({ autoFetch : true, maxFetch : 5000 });
+
+            return false;
+        }
+
+        // Get Account Search Query
+        function getAccountSearchQuery(searchKey) {
+            var query = '';
+            query += ' SELECT ';
+            query += '  Id ';
+            query += ' ,Name ';
+            query += ' ,Owner.Name ';
+            query += ' FROM ';
+            query += ' Account ';
+            if (searchKey) {
+                query += ' WHERE ';
+                query += ' Name LIKE ' + '\'' + searchKey + '%' + '\'';
+            }
+            query += ' ORDER BY Name ASC ';
+            return query;
+        }
+
+        // Add Account
+        function addAccount(recordNo, record) {
+            // Record NO
+            var $recordNo = $j('<td>' + recordNo +'</td>')
+                                .addClass('recordNoCol');
+            // Account Name
+            var $accountName = $j('<td>' + record.Name +'</td>');
+            // Owner Name
+            var $ownerName = $j('<td>' + record.Owner.Name +'</td>');
+            // Append
+            var $tr = $j('<tr></tr>')
+                        .append($recordNo)
+                        .append($accountName)
+                        .append($ownerName);
+            // Add Table
+            $accountTableBody.append($tr);
+        }
+    </script>
+</apex:page>

@@ -1,0 +1,90 @@
+<apex:page >
+    <style type="text/css">
+        #vf-body .outer,
+        #vf-body .outerNoSidebar {
+            background-color: #344A5F;
+        }
+                
+        #vf-page {
+            min-height: 400px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        
+        #vf-page * {
+            font-family: "ProximaNovaSoft-Regular", Calibri, 
+                "Gill Sans", "Gill Sans MT", Candara, Segoe, "Segoe UI", 
+                 Arial, sans-serif;
+        }
+        
+        #vf-page .title {
+            color: #FFFFFF;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+        #vf-page .searchText {
+            -webkit-border-radius: 2px 0 0 2px; 
+            -moz-border-radius: 2px 0 0 2px; 
+            border-radius: 2px 0 0 2px; 
+            border: 1px solid #FFFFFF;
+            width: 400px;
+            padding-left: 5px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            line-height: 1.7;
+            float: left;
+        }
+
+        #vf-page .linkBtn {
+            -webkit-border-radius: 0 2px 2px 0;
+            -moz-border-radius: 0 2px 2px 0;
+            border-radius: 0 2px 2px 0;
+            border: 1px solid #2A94D6;
+            line-height: 1.5;
+            font-weight: bold;
+            color: #FFFFFF;
+            background-color: #2A94D6;
+            text-decoration: none;
+            display: inline-block;
+            padding: 5px 10px;
+        }
+        #vf-page .linkBtn:hover {
+            opacity: 0.7;
+        }
+        
+        #vf-page .inputGroup:after {
+            content: "";
+            clear: both;
+            display: block;
+        }
+
+        #vf-page .search {
+            margin-bottom: 30px;
+        }
+
+        #vf-page .result {
+            color: #FFFFFF;
+        }
+
+        #vf-page .result table {
+            width: 100%;
+        }
+
+        #vf-page .result table th,
+        #vf-page .result table td {
+            color: #FFFFFF;
+            border-bottom: 1px solid #FFFFFF;
+            padding: 10px;
+        }
+
+        #vf-page .result table tr:hover td {
+            color: #FFAB00;
+            font-weight: bold;
+        }
+
+        #vf-page .recordNoCol {
+            text-align: center;
+        }
+    </style>
+</apex:page>
